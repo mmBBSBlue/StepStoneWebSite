@@ -1,0 +1,7 @@
+project-solution guid: 322926F3-FD2D-4D7E-81C8-55249E7E2238
+Project(
+	"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}" //???
+	) 
+	= 	"StepStones", 
+		"StepStones\StepStones.csproj", 
+		"{E624BE11-FED6-4C71-949B-FFA4DD8B1684}" //project guid
