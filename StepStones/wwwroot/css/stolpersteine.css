@@ -1,0 +1,97 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-image: url("../res/candle.jpg");
+    background-size: cover;
+    /* default font-size*/
+    font-size: 12pt;
+}
+a {
+    color: #fecd8b;
+}
+a:hover {
+    color: #e77539;
+    text-decoration-line: none;
+}
+
+a:visited{
+    color: #af3d00;
+}
+
+.header{
+    height: 15vh;
+    margin-top: 5vh;
+    background: #0a0a0a;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbarCool{
+    background-color: #0a0a0a;
+}
+.box1Transparent{
+    background-color: rgba(0,0,0,0.75);
+    color: whitesmoke;
+}
+
+.box1Transparent img {
+    height: 12rem;
+    width: auto;
+}
+
+.box1Transparent img:hover{
+    width: 50%;
+    height: auto;
+}
+
+.row{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.padding{
+    padding: 3rem;
+}
+
+.box2White{
+    background-color: white;
+    color: black;
+}
+
+footer{
+    text-align: center;
+    height: 3rem;
+    display: inline-flex;
+    justify-content: center;
+    color: whitesmoke;
+    background-color:  #0a0a0a;
+    padding: 1rem;
+}
+
+
+footer p {
+    margin: 0;
+    padding-right: 2rem;
+    font-size: 70%
+}
+
+@media screen and (max-width: 719px){
+    footer{
+        height: 6rem;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .box1Transparent img {
+        height: auto;
+        width: 100%;
+    }
+
+}
