@@ -23,19 +23,11 @@ namespace StepStones.Controllers
         {
             return View();
         }
-
-        [HttpGet("id")]
-        public IActionResult Index(int id)
+        
+        [HttpGet]
+        public IActionResult Contact()
         {
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult<string> GetStepStones()
-        {
-            var status = base.StatusCode(403, "Die angeforderte Seite steht momentan nicht zur verfügung.");
-
-            return new ActionResult<string>("sa"); 
         }
 
     }
