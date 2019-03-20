@@ -10,6 +10,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/stepstones.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -19,11 +20,11 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbarCool">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <a href="~/Views/Shared/_Layout.cshtml">~/Views/Shared/_Layout.cshtml</a>
+                    <a href="~/Views/Shared/_Layout.cshtml"></a>
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                 </button>
@@ -32,19 +33,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="ProjectOverview">Das Projekt</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - MMBBS</p>
-        </footer>
-    </div>
+     @RenderBody()
+     <footer class="fixed-bottom">
+        <p>Phillip, Julian und Eva</p>
+        <p>Expo Plaza 3</p>
+        <p>30539 Hannover</p>
+     </footer>
+
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
