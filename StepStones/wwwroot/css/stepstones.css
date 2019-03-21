@@ -8,7 +8,9 @@ body{
     /* default font-size*/
     font-size: 12pt;
 }
-a {
+
+
+.box1Transparent a {
     color: #fecd8b;
 }
 a:hover {
@@ -38,14 +40,18 @@ a:visited{
     color: whitesmoke;
 }
 
-.box1Transparent img {
-    height: 12rem;
-    width: auto;
+.carouselWrapper{
+    padding: 10%;
 }
 
-.box1Transparent img:hover{
-    width: 50%;
-    height: auto;
+.carouselFrame{
+    padding: 0.5rem;
+    background-color: white;
+}
+
+.box1Transparent img {
+    height: 20rem;
+    width: auto;
 }
 
 .row{
@@ -94,6 +100,10 @@ footer p {
     .box1Transparent img {
         height: auto;
         width: 100%;
+    }
+
+    h1{
+        text-align: center;
     }
 
 }
