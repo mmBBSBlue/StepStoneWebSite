@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Stolperstein - Karte";
+}
+    <div class="text-center">
+        <h2 class="site-title">Map</h2>
+    </div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" style="padding:0px">
+        <div style="border: 2px groove">
+            <div id="map" class="map" style="width:100%;"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="newStepStone" tabindex="9999" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>Neuer Stolperstein</p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div id="newStepStoneInformation" class="form-horizontal col-md-6">
+                            <div class="form-group">
+                                <label for="stepStoneInformation">Stolperstein Informationen:</label>
+                                <textarea class="form-control" id="stepStoneInformation" rows="5" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-horizontal col-md-4" id="ImageUploadDiv">
+                            <form method="post" enctype="multipart/form-data">
+                                <label for="stepStoneImage" class="visible-sm visible-md text-center">Stolperstein Bild</label>
+                                <input required id="stepStoneImage" name="files" type="file" class="form-control" style="height: 100%" aria-label="" accept="image/*" hidden draggable="true" contenteditable="true" inputmode="katakana">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="PostStepStone()">Erstellen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        InitalizeMap();
+    });
+</script>

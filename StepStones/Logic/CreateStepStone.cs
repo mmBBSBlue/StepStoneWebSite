@@ -20,7 +20,7 @@ namespace StepStones.Logic
         public StepStone Create(StepStone stepStone)
         {
             // Logic zur richtigkeitsPrüfung?
-            _sSDatabase.StepStone.Add(stepStone);
+            _sSDatabase.StepStones.Add(stepStone);
             _sSDatabase.SaveChanges();
             return stepStone;
         }

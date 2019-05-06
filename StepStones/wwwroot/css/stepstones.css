@@ -1,8 +1,29 @@
+Skip to content
+Why GitHub?
+Enterprise
+Explore
+Marketplace
+Pricing
+Search
+
+Sign in
+Sign up
+0 0 0 mmBBSBlue/StepStoneWebSite
+Code Issues 0 Pull requests 0 Projects 0 Insights
+All your code in one place
+GitHub makes it easy to scale back on context switching. Read rendered documentation, see the history of any file, and collaborate with contributors on projects across GitHub.
+
+See pricing for teams and enterprises
+StepStoneWebSite/StepStones/wwwroot/css/stepstones.css
+@adelgundxo adelgundxo Layout Startseite angepasst
+8f05a6a on 21 Mar
+109 lines (89 sloc) 1.48 KB
+
 html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     background-image: url("../images/candle.jpg");
     background-size: cover;
     /* default font-size*/
@@ -13,16 +34,17 @@ body{
 .box1Transparent a {
     color: #fecd8b;
 }
+
 a:hover {
     color: #e77539;
     text-decoration-line: none;
 }
 
-a:visited{
+a:visited {
     color: #af3d00;
 }
 
-.header{
+.header {
     height: 15vh;
     margin-top: 5vh;
     background: #0a0a0a;
@@ -32,19 +54,20 @@ a:visited{
     justify-content: center;
 }
 
-.navbarCool{
+.navbarCool {
     background-color: #0a0a0a;
 }
-.box1Transparent{
+
+.box1Transparent {
     background-color: rgba(0,0,0,0.75);
     color: whitesmoke;
 }
 
-.carouselWrapper{
+.carouselWrapper {
     padding: 10%;
 }
 
-.carouselFrame{
+.carouselFrame {
     padding: 0.5rem;
     background-color: white;
 }
@@ -54,27 +77,27 @@ a:visited{
     width: auto;
 }
 
-.row{
+.row {
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.padding{
+.padding {
     padding: 3rem;
 }
 
-.box2White{
+.box2White {
     background-color: white;
     color: black;
 }
 
-footer{
+footer {
     text-align: center;
     height: 3.5rem;
     display: inline-flex;
     justify-content: center;
     color: whitesmoke;
-    background-color:  #0a0a0a;
+    background-color: #0a0a0a;
     padding: 1rem;
     position: fixed;
     bottom: 0;
@@ -82,14 +105,14 @@ footer{
 }
 
 
-footer p {
-    margin: 0;
-    padding-right: 2rem;
-    font-size: 70%
-}
+    footer p {
+        margin: 0;
+        padding-right: 2rem;
+        font-size: 70%
+    }
 
-@media screen and (max-width: 719px){
-    footer{
+@media screen and (max-width: 719px) {
+    footer {
         height: 6rem;
         display: block;
     }
@@ -102,8 +125,20 @@ footer p {
         width: 100%;
     }
 
-    h1{
+    h1 {
         text-align: center;
     }
-
 }
+
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

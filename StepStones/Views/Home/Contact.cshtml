@@ -1,14 +1,87 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+﻿    <!-- Body Name Nachname Mailadresse(unrequired) Textfeld -->
+    <div class="container">
+        <div class="row article">
+            <div class="col-sm-12 text-center">
+                <h1>Kontakt</h1>
+                <p>wenn Sie Fragen haben oder Anmerkungen, dann schreiben sie uns einfach:</p>
+            </div>
+            <div class="col-sm-6">
+                <h2>Das Team</h2>
+                <p>Unser Team, bestehend aus renomierten Stolpersteinexperten, hat sich zusammengefunden um den Opfern des Nationalsozialismusses zu gedenken und ein Apell an alle Menschen zu senden.</p>
+                <p>Ziel dieser Website soll es sein, Menschen dazu zu bewegen mit offenen Augen durch die Welt zu gehen.</p>
+                <p>Gemeinsam wollen wir mit allen Menschen eine Karte erstellen, welche die Standorte der Stolpersteine visualisieren soll.</p>
+                <p>Dabei ist uns nicht wichtig, wer uns die Position des gefundenen Stolpersteines sendet.</p>
+                <p>Ungeachtet des Herkunftslandes oder der Religion dieser Person, freuen wir uns über jeden, der uns dabei Unterstützt.</p>
+                <p>Sollten Sie Fragen an unser Team, oder Anmerkungen zu einelnen Positionen haben, kontaktieren Sie uns einfach.</p>
+            </div>
+            <div class="col-sm-6">
+                <form action="/action_page.php" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="vname">Vorname:</label>
+                        <input type="text" class="form-control" id="vname" name="vorname" placeholder="Ihr Vorname ..." required>
+                        <div class="valid-feedback">Gültige Eingabe</div>
+                        <div class="invalid-feedback">Bitte füllen Sie diese Spalte aus ...</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nname">Nachname:</label>
+                        <input type="text" class="form-control" id="nname" name="nachname" placeholder="Ihr Nachname ..." required>
+                        <div class="valid-feedback">Gültige Eingabe</div>
+                        <div class="invalid-feedback">Bitte füllen Sie diese Spalte aus ...</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="land">Land:</label>
+                        <input type="text" class="form-control" id="land" name="land" placeholder="Sie kommen aus ..." required>
+                        <div class="valid-feedback">Gültige Eingabe</div>
+                        <div class="invalid-feedback">Bitte füllen Sie diese Spalte aus ...</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="plz">Postleihzahl:</label>
+                            <input type="number" required class="form-control" id="plz" min="10000" name="plz" placeholder="Sie kommen aus ...">
+                            <div class="valid-feedback">Gültige Eingabe</div>
+                            <div class="invalid-feedback">Bitte füllen Sie diese Spalte aus ...</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="city">Ort:</label>
+                            <input type="text" required class="form-control" id="city" name="city" placeholder="Sie kommen aus ..."/>
+                            <div class="valid-feedback">Gültige Eingabe</div>
+                            <div class="invalid-feedback">Bitte füllen Sie diese Spalte aus ...</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea">Eingabefeld:</label>
+                        <textarea class="form-control" id="textarea" name="textarea" placeholder="Schreiben Sie uns eine Nachricht ..." required></textarea>
+                        <div class="valid-feedback">Gültige Eingabe</div>
+                        <div class="invalid-feedback">Bitte schreiben Sie uns etwas ...</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-sm-12">
+                <img class="img-fluid mx-auto d-block rounded-circle" src=~/Picture/Die-drei-Fragezeichen.png" style="width:50% " alt="Unser Team">
+            </div>
+        </div>
+    </div>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <script>
+            // Disable form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Get the forms we want to add validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                        form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

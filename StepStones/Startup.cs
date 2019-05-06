@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StepStones.Database;
+using System.IO;
 
 namespace StepStones
 {
@@ -32,13 +33,12 @@ namespace StepStones
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            string databaseConnectionPath = "~/data.DB";
+            string databaseConnectionPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "ssDatabase.db");
 
             services.AddDbContext<SSDatabase>(
-                options=>options.UseSqlite(databaseConnectionPath, null), 
+                options => options.UseSqlite("Filename=" + databaseConnectionPath),
                 ServiceLifetime.Scoped
-                );
-
+                ).AddEntityFrameworkSqlite();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -56,7 +56,6 @@ namespace StepStones
                 app.UseHsts();
             }
             
-
             app.UseCors();
 
             //app.UseHttpsRedirection();

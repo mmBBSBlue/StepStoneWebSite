@@ -1,206 +1,234 @@
-﻿var vectorSource = new ol.source.Vector();
-var vectorLayer = new ol.layer.Vector({
-    source: vectorSource
-});
+﻿// Global Variables
+var map;
+var markers;
+var zoom = 14;
+var clickedLonLat;
+var parentOffset;
+var divPosition;
 
-var features = new ol.Collection();
-var areaSource = new ol.source.Vector({
-    features: features
-});
+// Initalize the Openstreetmap
+function InitalizeMap() {
+    // Set Global Variables
+    parentOffset = $("#map").parent().offset();
+    divPosition = $("#map").position();
+    mapHeight = window.outerHeight / 2;
 
-var areaVectorLayer = new ol.layer.Vector({
-    source: areaSource,
-    style: new ol.style.Style({
-        fill: new ol.style.Fill({
-            color: 'rgba(255, 167, 66, 0.4)'
-        }),
-        stroke: new ol.style.Stroke({
-            color: '#ff7733',
-            width: 2
-        }),
-        image: new ol.style.Circle({
-            radius: 7,
-            fill: new ol.style.Fill({
-                color: '#ff7733'
-            })
-        })
-    })
-});
+    // Set Map height
+    $("#map").attr("style", "height:" + mapHeight + "px;");
 
-var iconStyle = new ol.style.Style({
-    image: new ol.style.Icon({
-        //anchor: [0,0],
-        //anchorXUnits: 'fraction',
-        //anchorYUnits: 'pixels',
-        opacity: 0.75,
-        src: 'images/marker.png'
-    })
-});
+    // Get all exist StepStones
+    $.get("/Home/GetAllStepStones",
+        function (e) {
+            $.each(e,
+                function (index, step) {
+                    var marker = new OpenLayers.Marker(new OpenLayers.LonLat(step.lon, step.lat));
+                    markers.addMarker(marker);
+                    marker.events.register('click', marker, function (e) {
+                        popup = new OpenLayers.Popup("StepStonePopUp", marker.lonlat, new OpenLayers.Size(350, 300), false);
+                        map.addPopup(popup);
+                        popup.hide();
+                        $("#StepStonePopUp").css("border", "1px solid");
+                        $("#StepStonePopUp_GroupDiv").load("/Home/Popup?lon=" + marker.lonlat.lon + "&lat=" + marker.lonlat.lat);
+                    });
+                }
+            )
+        }
+    );
 
-var map = new ol.Map({
-    layers: [
-    new ol.layer.Tile({
-        source: new ol.source.OSM()
-    }),
-    vectorLayer,
-        areaVectorLayer],
-    feature: features,
-    target: 'map',
-    controls: ol.control.defaults({
-        attributionOptions: /** @type {olx.control.AttributionOptions} */
-        ({
-            collapsible: false
-        })
-    }),
-    view: new ol.View({
-        center: [0, 0],
-        zoom: 2
-    })
-});
+    // Initalize Map
+    map = new OpenLayers.Map("map");
+    map.addLayer(new OpenLayers.Layer.OSM());
 
-//map.on('click', function (evt) {
-//    console.log("map" + evt);
-//    $('.contextMenu').hide();
-//});
+    // Map Dispose Events
+    map.events.register("move", map,
+        function () {
+            $('.contextMenu').remove();
+            $("#StepStonePopUp").remove();
+        }
+    );
+    map.events.register("moveend", map,
+        function () {
+            $('.contextMenu').remove();
+            $('#StepStonePopUp').remove();
+        }
+    );
+    map.events.register("zoom", map,
+        function () {
+            $('.contextMenu').remove();
+            $('#StepStonePopUp').remove();
+        }
+    )
 
-//map.getViewport().addEventListener('contextmenu', function (e) {
-//    e.preventDefault();
-//    var divPosition = $("#map").position();
-//    console.log("mapposition x:" + e.layerX + ",mapposition y:" + e.layerY);
-//    openContextMenu(e, e.layerX + divPosition.left, e.layerY + divPosition.top);
-//});
+    // Initalize Marker Layer
+    markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+    StartFocus();
 
-//function openContextMenu(e, x, y) {
-//    $('.contextMenu').remove();
-//    $('body').append('<div class="contextMenu" style=" top: ' + y + 'px; left:' + x + 'px;">' +
-//        '<div class="menuItem" onclick="handleContexMenuEvent(\'zoomIn\', \''+ x +'\', \''+ y +'\');"> Zoom In </div>' +
-//		'<div class="menuItem" onclick="handleContexMenuEvent(\'zoomOut\', \''+ x +'\', \''+ y +'\');"> Zoom Out </div>' +
-//		'<div class="menuItem" onclick="handleContexMenuEvent(\'centerMap\', \''+ x +'\', \''+ y +'\');"> Map Zentrieren </div>' +													'<div class="menuSeparator"> </div>' +
-//        '<div class="menuItem"> Neuer Stolperstein </div>' +
-//        '</div>');
-//}
+    // Add Contextmenu Event
+    map.getViewport().addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        openContextMenu(e);
+    });
+}
 
-var contextmenuItems = [
-    {
-        text: 'Neuer Stolperstein',
-        icon: pinIcon,
-        callback: marker
-    },
-    '-' // this is a separator
-];
-
-var contextmenu = new ContextMenu({
-    width: 180,
-    items: contextmenuItems
-});
-
-map.addControl(contextmenu);
-contextmenu.on('open', function (evt) {
-        contextmenu.clear();
-        contextmenu.extend(contextmenuItems);
-        contextmenu.extend(contextmenu.getDefaultItems());
-});
-
-function marker(obj) {
-    var coord4326 = ol.proj.transform(obj.coordinate, 'EPSG:3857', 'EPSG:4326'),
-        template = 'Coordinate is ({x} | {y})',
-        iconStyle = new ol.style.Style({
-            image: new ol.style.Icon({ scale: .6, src: pinIcon }),
-            text: new ol.style.Text({
-                offsetY: 25,
-                text: ol.coordinate.format(coord4326, template, 2),
-                font: '15px Open Sans,sans-serif',
-                fill: new ol.style.Fill({ color: '#111' }),
-                stroke: new ol.style.Stroke({ color: '#eee', width: 2 })
-            })
-        }),
-        feature = new ol.Feature({
-            type: 'removable',
-            geometry: new ol.geom.Point(obj.coordinate)
-        });
-
-    feature.setStyle(iconStyle);
-    vectorLayer.getSource().addFeature(feature);
+// Set focus to Hannover, Germany
+function StartFocus() {
+    var hannoverLocation = new OpenLayers.LonLat(1084686.2185368, 6867932.5105859);
+    map.setCenter(hannoverLocation, zoom);
 }
 
 
-function handleContexMenuEvent(option, x, y) {
+// Contextmenu
+function openContextMenu(e) {
+    // Keep Save
     $('.contextMenu').remove();
-    console.log("content x:" + x + ", content y:" + y);
 
+    // Default Values
+    x = 1;
+    y = 1;
 
-    var divPosition = $("#map").position();
-    console.log("x:y" + x + " " + y);
-    console.log("div y " + divPosition.top);
-    var location = map.getCoordinateFromPixel([x - divPosition.left, y - divPosition.top + 7]);
+    // Calculate correct Positions
+    var relX = e.pageX - parentOffset.left;
+    var relY = e.pageY - parentOffset.top;
 
-    if (option == 'zoomIn' ) {
-        var view = map.getView();
-        map.getView().setZoom(view.getZoom() + 1);
-        console.log(map.getView());
-    } else if (option == 'zoomOut' ) {
-        var view = map.getView();
-        map.getView().setZoom(view.getZoom() - 1);
-        
-    } else if (option == 'centerMap' ) {
-        console.log(location);
-        goToCoord(location[0], location[1]);
-    } else if (option == 'newStepStone') {
-        //var iconFeature1 = new ol.Feature({
-        //    geometry: new ol.geom.Point(ol.proj.transform([-4.5, 30.59375], 'EPSG:4326',
-        //        'EPSG:3857')),
-        //    population: 4001,
-        //    rainfall: 501
-        //});
-        //features.push(iconFeature1);
-        //console.log(features);
-        //vectorSource.addFeature(iconFeature1);
-        //$("#newStepStone").modal('show');
-        //$(window).resize(
-        //    resizeModalContent()
-        //);
-        //$('#newStepStone').on('shown.bs.modal', function (e) {
-        //    resizeModalContent();
-        //});
-        var feature = new ol.Feature({
-            geometry: new ol.geom.Point(ol.proj.transform(location, 'EPSG:4326','EPSG:3857'))
-        });
-        var iconFeature1 = new ol.Feature({
-            geometry: new ol.geom.Point(ol.proj.transform(x, y, 'EPSG:3857', 'EPSG:4326')),
-            population: 4001,
-            rainfall: 501
-        });
-            //new ol.geom.Point(location));
-        //feature.setStyle(iconStyle);
-        //features.push(feature);
-        features.push(iconFeature1);
-        vectorSource.addFeature(iconFeature1);
-        //vectorSource.addFeature(feature);
-        
+    // The Contextmenu 
+    $('#map').append('<div class="contextMenu" style=" top: ' + (relY) + 'px; left:' + (relX) + 'px; z-index: 9999;"  >' +
+        '<div class="menuItem" onclick="handleContexMenuEvent(\'zoomIn\', \'' + relX + '\', \'' + relY + '\');"> Zoom In </div>' +
+        '<div class="menuItem" onclick="handleContexMenuEvent(\'zoomOut\', \'' + relX + '\', \'' + relY + '\');"> Zoom Out </div>' +
+        '<div class="menuItem" onclick="handleContexMenuEvent(\'centerMap\', \'' + relX + '\', \'' + relY + '\');"> Map Zentrieren </div>' +
+        '<div class="menuSeparator"> </div>' +
+        '<div class="menuItem" onclick="handleContexMenuEvent(\'newStepStone\', \'' + relX + '\', \'' + relY + '\');" > Neuer Stolperstein </div>' +
+        '</div>');
+}
+
+// Close Contextmenu
+function closeContextMenu() {
+    $('.contextMenu').remove();
+}
+
+// Contextmenu Logic
+function handleContexMenuEvent(option, x, y) {
+    // Switched Clicked Option from Contextmenu
+    switch (option) {
+        case "zoomIn":
+            map.setCenter(
+                map.getLonLatFromPixel(
+                    new OpenLayers.Pixel(x - divPosition.left, y - divPosition.top)
+                ), map.zoom);
+            map.zoomIn();
+            break;
+        case "zoomOut":
+            map.setCenter(
+                map.getLonLatFromPixel(
+                    new OpenLayers.Pixel(x - divPosition.left, y - divPosition.top)
+                ), map.zoom);
+            map.zoomOut();
+            break;
+        case "centerMap":
+            map.setCenter(
+                map.getLonLatFromPixel(
+                    new OpenLayers.Pixel(x - divPosition.left, y - divPosition.top)
+                ), zoom);
+            break;
+        case "newStepStone":
+            // the correct Clicked Position
+            clickedLonLat = map.getLonLatFromPixel(
+                new OpenLayers.Pixel(x - divPosition.left, y - divPosition.top)
+            );
+
+            // Resize the Modal when activated
+            $('#newStepStone').on('shown.bs.modal', function (e) {
+                resizeModalContent();
+            });
+
+            // Show Modal
+            $("#newStepStone").modal();
+            break;
+        default: break;
     }
+
+    $('.contextMenu').remove();
 }
 
-function goToCoord(x, y) {
-    var p = new ol.geom.Point([x,y]).getCoordinates();
-    map.getView().setCenter(p);
-}
-
-function resizeModalContent(){
-    $.each( $(".device-width"), function(i, obj){
-        if($(obj).is(":visible")){
+// Resize Modal
+function resizeModalContent() {
+    // Calc the correct Scale
+    $.each($(".device-width"), function (i, obj) {
+        if ($(obj).is(":visible")) {
             var device = $(obj).attr('id');
-            if(device == "lg" || device == "md"){
-                $("#ImageUploadDiv").height($("#ImageUploadDiv").parent().height() - ($('label[for="stepStoneImage"]').height()*2)); 
+            if (device == "lg" || device == "md") {
+                $("#ImageUploadDiv").height($("#ImageUploadDiv").parent().height() - ($('label[for="stepStoneImage"]').height() * 2));
                 $("#stepStoneImage").removeClass("imageUploadInput");
-                $("#stepStoneImage").addClass("imageUploadInput");            
+                $("#stepStoneImage").addClass("imageUploadInput");
             }
-            else{
-                //$("#ImageUploadDiv").height() =  $("#stepStoneName").height();
+            else {
                 $("#stepStoneImage").removeClass("imageUploadInput");
             }
         }
-    });  
+    });
 }
 
+// Create a new Stepstone
+function PostStepStone() {
+    var data = new FormData();
+    
+    // Get Userinput
+    var info = $("#stepStoneInformation")[0].value
+    var image = $("#stepStoneImage").get(0).files[0];
 
+
+    // Data Validation
+    if (info == "") {
+        $("#stepStoneInformation")[0].addClass("is-invalid");
+    }
+
+    if (image == "") {
+        $("#stepStoneImage")[0].addClass("is-invvalid");
+    }
+
+    // Create FormData Object to Post
+    data.append(image.name, image);
+    data.append("Description", info);
+    data.append("Lon", clickedLonLat.lon);
+    data.append("Lat", clickedLonLat.lat);
+
+    // Post data to Controller
+    $.ajax({
+        type: "POST",
+        url: "/Home/NewStepStone",
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function (message) {
+            // Close Modal
+            $('#newStepStone').modal('hide');
+
+            // Add new Marker for the new Stepstone
+            var marker = new OpenLayers.Marker(clickedLonLat);
+            markers.addMarker(marker);
+
+            // Add a Click event to the new Marker
+            marker.events.register('click', marker, function (e) {
+                // Add a new Popup to the new Click event
+                popup = new OpenLayers.Popup("StepStonePopUp", marker.lonlat, new OpenLayers.Size(350, 300), false);
+                map.addPopup(popup);
+
+                // First hide Popup to Redesign the Popup
+                popup.hide();
+                $("#StepStonePopUp").css("border", "1px solid");
+
+                // Load the Popup Partial View
+                $("#StepStonePopUp_GroupDiv").load("/Home/Popup?lon=" + marker.lonlat.lon + "&lat=" + marker.lonlat.lat);
+            });
+        },
+        error: function () {
+            //TODO: JBO
+        }
+    });
+}
+
+// Close Popup
+function ClosePopup() {
+    $("#StepStonePopUp").remove();
+}
 
