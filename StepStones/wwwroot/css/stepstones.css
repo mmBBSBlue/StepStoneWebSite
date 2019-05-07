@@ -89,6 +89,10 @@ margin-top: 6rem;
     height: 90vh;
 }
 
+.container{
+    margin-bottom: 3.5rem;
+}
+
 footer {
     text-align: center;
     height: 3.5rem;
