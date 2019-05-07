@@ -60,6 +60,10 @@ a:visited {
     padding: 1rem;
 }
 
+.index-wrapper{
+margin-top: 6rem;
+}
+
 
 .picwrapper img {
     height: 15rem;
