@@ -1,23 +1,4 @@
-Skip to content
-Why GitHub?
-Enterprise
-Explore
-Marketplace
-Pricing
-Search
 
-Sign in
-Sign up
-0 0 0 mmBBSBlue/StepStoneWebSite
-Code Issues 0 Pull requests 0 Projects 0 Insights
-All your code in one place
-GitHub makes it easy to scale back on context switching. Read rendered documentation, see the history of any file, and collaborate with contributors on projects across GitHub.
-
-See pricing for teams and enterprises
-StepStoneWebSite/StepStones/wwwroot/css/stepstones.css
-@adelgundxo adelgundxo Layout Startseite angepasst
-8f05a6a on 21 Mar
-109 lines (89 sloc) 1.48 KB
 
 html {
     scroll-behavior: smooth;
@@ -72,8 +53,16 @@ a:visited {
     background-color: white;
 }
 
-.box1Transparent img {
-    height: 20rem;
+.picture-legend{
+    background-color: #e77539;
+    margin-left: 2rem;
+    color: white;
+    padding: 1rem;
+}
+
+
+.picwrapper img {
+    height: 15rem;
     width: auto;
 }
 
@@ -89,6 +78,11 @@ a:visited {
 .box2White {
     background-color: white;
     color: black;
+}
+
+.wrapper-white{
+    background-color: white;
+    height: 90vh;
 }
 
 footer {
@@ -128,17 +122,9 @@ footer {
     h1 {
         text-align: center;
     }
-}
 
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+    .row{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
