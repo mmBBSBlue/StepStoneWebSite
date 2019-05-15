@@ -6,6 +6,10 @@ var clickedLonLat;
 var parentOffset;
 var divPosition;
 
+$(document).ready(function () {
+        InitalizeMap();
+});
+
 // Initalize the Openstreetmap
 function InitalizeMap() {
     // Set Global Variables
@@ -157,12 +161,12 @@ function resizeModalContent() {
         if ($(obj).is(":visible")) {
             var device = $(obj).attr('id');
             if (device == "lg" || device == "md") {
-                $("#ImageUploadDiv").height($("#ImageUploadDiv").parent().height() - ($('label[for="stepStoneImage"]').height() * 2));
-                $("#stepStoneImage").removeClass("imageUploadInput");
-                $("#stepStoneImage").addClass("imageUploadInput");
+                //$("#ImageUploadDiv").height($("#ImageUploadDiv").parent().height() - ($('label[for="stepStoneImage"]').height() * 2));
+                //$("#stepStoneImage").removeClass("imageUploadInput");
+                //$("#stepStoneImage").addClass("imageUploadInput");
             }
             else {
-                $("#stepStoneImage").removeClass("imageUploadInput");
+            //    $("#stepStoneImage").removeClass("imageUploadInput");
             }
         }
     });
@@ -173,17 +177,22 @@ function PostStepStone() {
     var data = new FormData();
     
     // Get Userinput
-    var info = $("#stepStoneInformation")[0].value
+    var info = $("#stepStoneInformation")[0].value;
     var image = $("#stepStoneImage").get(0).files[0];
-
+    console.log(info);
+    console.log(image);
 
     // Data Validation
     if (info == "") {
-        $("#stepStoneInformation")[0].addClass("is-invalid");
+        $("#stepStoneInformation").addClass("is-invalid");
     }
 
-    if (image == "") {
-        $("#stepStoneImage")[0].addClass("is-invvalid");
+    if (image == null) {
+        $("#stepStoneImage").addClass("is-invalid");
+    }
+
+    if (image == null || info == null) {
+        return;
     }
 
     // Create FormData Object to Post
