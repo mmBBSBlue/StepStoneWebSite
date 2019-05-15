@@ -1,0 +1,138 @@
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: url("../images/candle.jpg");
+    background-size: cover;
+    /* default font-size*/
+    font-size: 12pt;
+}
+
+
+.box1Transparent a {
+    color: #fecd8b;
+}
+
+a:hover {
+    color: #e77539;
+    text-decoration-line: none;
+}
+
+a:visited {
+    color: #af3d00;
+}
+
+.header {
+    height: 15vh;
+    margin-top: 5vh;
+    background: #0a0a0a;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbarCool {
+    background-color: #0a0a0a;
+}
+
+.box1Transparent {
+    background-color: rgba(0,0,0,0.75);
+    color: whitesmoke;
+}
+
+.carouselWrapper {
+    padding: 10%;
+}
+
+.carouselFrame {
+    padding: 0.5rem;
+    background-color: white;
+}
+
+.picture-legend{
+    background-color: #e77539;
+    margin-left: 2rem;
+    color: white;
+    padding: 1rem;
+}
+
+.index-wrapper{
+margin-top: 6rem;
+}
+
+
+.picwrapper img {
+    height: 15rem;
+    width: auto;
+}
+
+.row {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.padding {
+    padding: 3rem;
+}
+
+.box2White {
+    background-color: white;
+    color: black;
+}
+
+.wrapper-white{
+    background-color: white;
+    height: 90vh;
+}
+
+.container{
+    margin-bottom: 3.5rem;
+}
+
+footer {
+    text-align: center;
+    height: 3.5rem;
+    display: inline-flex;
+    justify-content: center;
+    color: whitesmoke;
+    background-color: #0a0a0a;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+    footer p {
+        margin: 0;
+        padding-right: 2rem;
+        font-size: 70%
+    }
+
+@media screen and (max-width: 719px) {
+    footer {
+        height: 6rem;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .box1Transparent img {
+        height: auto;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .row{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

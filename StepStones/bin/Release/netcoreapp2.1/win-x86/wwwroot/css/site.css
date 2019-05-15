@@ -1,0 +1,95 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+for details on configuring this project to bundle and minify static web assets. */
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.article {
+    background-color: rgba(0,0,0,0.75);
+    color: whitesmoke;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .carousel-item img[src$=".svg"] {
+    width: 100%;
+}
+
+.carousel-custom-control{
+
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.mapSize {
+    margin: 0.5%;
+}
+
+.map {
+    width: 100%;
+}
+
+.contextMenu {
+    cursor: pointer;
+    background-color: #eee;
+    position: absolute;
+    border: solid 1px black;
+    width: 150px;
+}
+
+    .contextMenu .menuItem {
+        padding: 5px;
+    }
+
+        .contextMenu .menuItem:hover {
+            background-color: #ccc;
+        }
+
+.menuSeparator {
+    border-bottom: solid 1px black;
+}
+
+.imageUploadInput {
+    background-image: url("/Picture/upload.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-background-size: contain;
+    background-size: 40% 40%;
+}
+
+.inputfile:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.site-title {
+    color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#131313+36,131313+66&0.01+5,1+33,1+68,0.17+89,0.01+89 */
+    background: -moz-linear-gradient(left, rgba(19,19,19,0.01) 5%, rgba(19,19,19,1) 33%, rgba(19,19,19,1) 36%, rgba(19,19,19,1) 66%, rgba(19,19,19,1) 68%, rgba(19,19,19,0.01) 89%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(19,19,19,0.01) 5%,rgba(19,19,19,1) 33%,rgba(19,19,19,1) 36%,rgba(19,19,19,1) 66%,rgba(19,19,19,1) 68%,rgba(19,19,19,0.01) 89%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(19,19,19,0.01) 5%,rgba(19,19,19,1) 33%,rgba(19,19,19,1) 36%,rgba(19,19,19,1) 66%,rgba(19,19,19,1) 68%,rgba(19,19,19,0.01) 89%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03131313', endColorstr='#03131313',GradientType=1 ); /* IE6-9 */
+}
+
+.very-dark-navbar{
+    background-color: #0a0a0a!important;
+}
